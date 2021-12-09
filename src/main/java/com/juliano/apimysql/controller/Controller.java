@@ -35,20 +35,7 @@ public class Controller {
             if(persons.isEmpty()){
                 throw new Exception(new Error("Pessoa não encontrada"));
             } else {
-                PersonsDadosDTO personsDadosDTO = new PersonsDadosDTO();
-                personsDadosDTO.setId(Optional.ofNullable(persons.orElseThrow().getId()));
-                personsDadosDTO.setNome(Optional.ofNullable(persons.orElseThrow().getName()));
-                personsDadosDTO.setDocumento(Optional.ofNullable(persons.orElseThrow().getDocument()));
-                personsDadosDTO.setContatos(Optional.ofNullable(persons.get().getContatos()));
-
-                Set<Optional<PersonsDadosDTO>> _persons = new HashSet<>();
-                _persons.add(Optional.of(personsDadosDTO));
-                _persons.iterator();
-
-                PersonsDTO _listPesonsDTO = new PersonsDTO();
-                _listPesonsDTO.setPessoas(_persons);
-
-                var result = new ResponseEntity<PersonsDTO>(_listPesonsDTO, HttpStatus.OK);
+                var result = new ResponseEntity<PersonsDTO>(service.criaPersonDTO(persons), HttpStatus.OK);
                 logs.logRequest(request, headers, result, LogType.INFO, null);
                 return result;
             }
